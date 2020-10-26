@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
   getBooksQuery,
@@ -12,13 +12,11 @@ function AddBook() {
     genre: "",
     authorid: "",
   };
-  const inputnameRef = useRef('');
-  const inputgenreRef = useRef('');
-  const selectauthorRef = useRef('');
+
   const { loading, error, data } = useQuery(getAuthorsQuery);
   const [book, setbook] = useState(initialbook);
   const [addbook] = useMutation(addBookMutation);
-  if (loading) return "loading ...";
+  if (loading) return "loading authors ...";
   if (error) return `Error ${error.message}`;
 
   const addbookhandler = (e) => {
@@ -32,8 +30,6 @@ function AddBook() {
       },
       refetchQueries: [{ query: getBooksQuery }],
     });
-    inputgenreRef.current.value = "";
-    inputnameRef.current.value = "";
   };
 
   return (
@@ -42,18 +38,16 @@ function AddBook() {
         <input
           placeholder="book name"
           type="text"
-          ref={inputnameRef}
           value={book.name}
           onChange={(e) => setbook({ ...book, name: e.target.value })}
         />
         <input
           placeholder="genre"
           type="text"
-          ref={inputgenreRef}
           value={book.genre}
           onChange={(e) => setbook({ ...book, genre: e.target.value })}
         />
-        <select ref={selectauthorRef}
+        <select 
           onChange={(e) => setbook({ ...book, authorid: e.target.value })}
         >
           <option>Select Author</option>
