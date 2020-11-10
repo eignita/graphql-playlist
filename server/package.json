@@ -2,9 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "learn graphql",
-  "main": "index.js",
+  "main": "app.js",
+  "type": "module" ,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "author": "dravit kumar",
   "license": "UNLICENSED",
@@ -14,6 +15,7 @@
     "express-graphql": "^0.11.0",
     "graphql": "^15.3.0",
     "lodash": "^4.17.20",
-    "mongoose": "^5.10.10"
+    "mongoose": "^5.10.10",
+    "nodemon": "^2.0.6"
   }
 }
